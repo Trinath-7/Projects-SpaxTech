@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle - Premium Clothing Brand</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e63946;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icon {
+            margin-left: 1.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #e63946;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1400/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #e63946;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background-color: #e63946;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-item {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-overlay .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            background-color: white;
+            color: #333;
+        }
+
+        .category-overlay .btn-small:hover {
+            background-color: #e63946;
+            color: white;
+        }
+
+        /* Featured Products Section */
+        .featured-products {
+            padding: 5rem 5%;
+            background-color: #fff;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: #e63946;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -3rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 0.7rem 0;
+            transition: bottom 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 0;
+        }
+
+        .product-action-btn {
+            background-color: white;
+            color: #333;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .product-action-btn:hover {
+            background-color: #e63946;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e63946;
+            margin-right: 1rem;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-right: 0.5rem;
+        }
+
+        .reviews-count {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.7rem 0;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e63946;
+        }
+
+        /* T-Shirts Section */
+        .product-section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-section:nth-child(odd) {
+            background-color: #f8f8f8;
+        }
+
+        .product-section:nth-child(even) {
+            background-color: #fff;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: #333;
+            color: white;
+        }
+
+        .testimonials .section-title h2 {
+            color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -15px;
+            font-size: 3rem;
+            font-family: Georgia, serif;
+            color: #e63946;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 5%;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #ddd;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #c1121f;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #444;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: #e63946;
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #e63946;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #e63946;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            color: #aaa;
+            font-size: 0.9rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                margin-bottom: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input {
+                border-right: 2px solid #ddd;
+                border-radius: 4px;
+                margin-bottom: 1rem;
+            }
+
+            .newsletter-btn {
+                border-radius: 4px;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Castle<span>.</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tshirts">T-Shirts</a></li>
+                    <li><a href="#hoodies">Hoodies</a></li>
+                    <li><a href="#shirts">Shirts</a></li>
+                    <li><a href="#pants">Pants</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon"><i class="fas fa-search"></i></div>
+                <div class="nav-icon"><i class="fas fa-user"></i></div>
+                <div class="nav-icon"><i class="fas fa-heart"></i></div>
+                <div class="nav-icon"><i class="fas fa-shopping-cart"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ELEVATE YOUR STYLE</h1>
+            <p>Discover the premium collection of sustainable, fashionable clothing that redefines modern wardrobe essentials.</p>
+            <a href="#categories" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="section-title">
+            <h2>Shop By Category</h2>
+        </div>
+        <div class="category-grid">
+            <div class="category-item">
+                <img src="C:\Users\krish\OneDrive\Pictures/T-shirt-10.png" alt="T-Shirts">
+                <div class="category-overlay">
+                    <h3>T-Shirts</h3>
+                    <p>Premium quality designer tees</p>
+                    <a href="#tshirts" class="btn btn-small">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <img src="C:\Users\krish\OneDrive\Pictures/Hoddies-1.png" alt="Hoodies">
+                <div class="category-overlay">
+                    <h3>Hoodies</h3>
+                    <p>Comfortable & stylish hoodies</p>
+                    <a href="#hoodies" class="btn btn-small">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <img src="C:\Users\krish\OneDrive\Pictures/Shirt-1.png" alt="Shirts">
+                <div class="category-overlay">
+                    <h3>Shirts</h3>
+                    <p>Classy formal & casual shirts</p>
+                    <a href="#shirts" class="btn btn-small">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <img src="C:\Users\krish\OneDrive\Pictures/Pants-1.png" alt="Pants">
+                <div class="category-overlay">
+                    <h3>Pants</h3>
+                    <p>Elegant & comfortable pants</p>
+                    <a href="#pants" class="btn btn-small">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="section-title">
+            <h2>Featured Products</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/T-shirt-13,png" alt="Featured Product 1">
+                    <div class="product-badge">New</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Premium Cotton T-shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$29.99</span>
+                        <span class="old-price">$39.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="reviews-count">(42)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/Hoddie-2.png" alt="Featured Product 2">
+                    <div class="product-badge">-15%</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Urban Hoodie</h3>
+                    <div class="product-price">
+                        <span class="current-price">$49.99</span>
+                        <span class="old-price">$59.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="reviews-count">(78)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/Shirt-2.png" alt="Featured Product 3">
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Classic Oxford Shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$45.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="reviews-count">(36)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/pants-2.png" alt="Featured Product 4">
+                    <div class="product-badge">Hot</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Slim Fit Chinos</h3>
+                    <div class="product-price">
+                        <span class="current-price">$59.99</span>
+                        <span class="old-price">$69.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="reviews-count">(52)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- T-Shirts Section -->
+    <section id="tshirts" class="product-section">
+        <div class="section-title">
+            <h2>T-Shirts</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/T-shirt -3.png" alt="T-Shirt 1">
+                    <div class="product-badge">Bestseller</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Anime T-shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$24.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="reviews-count">(93)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/T-shirt-7.png" alt="T-Shirt 2">
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">RetroCool Vibes T-shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$22.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="reviews-count">(41)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/T-shirt-12.png" alt="T-Shirt 3">
+                    <div class="product-badge">New</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Alpha Fusion T-shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$29.99</span>
+                        <span class="old-price">$34.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            </div>
+                        <span class="reviews-count">(41)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="C:\Users\krish\OneDrive\Pictures/T-shirt-9.png" alt="T-Shirt 3">
+                    <div class="product-badge">New</div>
+                    <div class="product-actions">
+                        <button class="product-action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-eye"></i></button>
+                        <button class="product-action-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bloomscape T-shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">$29.99</span>
+                        <span class="old-price">$34.99</span>
+                    </div>
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            </div>
+                        <span class="reviews-count">(41)</span>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            </div> <section id="Hoddies" class="product-section">
+        <div class="section-title">
+            <h2>hoddies</h2>
+        </div>
+         <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Coming Soon</h1>
+        </div>
+    </section>
+                    <button class="add-to-cart">Add to Cart</button>
+             <section id="Shirts" class="product-section">
+        <div class="section-title">
+            <h2>Shirts</h2>
+             <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Coming Soon</h1>
+        </div>
+    </section>
+        </div> <section id="Pants" class="product-section">
+        <div class="section-title">
+            <h2>pants</h2>
+        </div>
+         <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Coming Soon</h1>
+        </div>
+    </section>
